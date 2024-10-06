@@ -12,8 +12,8 @@ const createCard = async (cardBody) => {
   return Card.create(cardBody);
 };
 
-const updateCardById = async (cardBody) => {
-  return Card.create(cardBody);
+const updateCardById = async (id, cardBody) => {
+  return Card.findByIdAndUpdate(id, cardBody, { new: true });
 };
 
 export { getCardById, getAllCards, createCard, updateCardById };

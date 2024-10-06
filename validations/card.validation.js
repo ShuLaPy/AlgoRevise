@@ -21,4 +21,13 @@ const getCard = {
   }),
 };
 
-export { createCard, getCard };
+const reviewCard = {
+  params: Joi.object().keys({
+    cardId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    grade: Joi.string().required().valid("easy", "good", "hard", "again"),
+  }),
+};
+
+export { createCard, getCard, reviewCard };

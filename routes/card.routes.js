@@ -6,16 +6,25 @@ import * as cardValidation from "../validations/card.validation.js";
 const cardRouter = Router();
 
 cardRouter.get("/", cardController.getDeckCard);
+
 cardRouter.get(
   "/:cardId",
   validate(cardValidation.getCard),
   cardController.getDeckCard
 );
+
+cardRouter.patch(
+  "/review/:cardId",
+  validate(cardValidation.reviewCard),
+  cardController.reviewDeckCard
+);
+
 cardRouter.post(
   "/",
   validate(cardValidation.createCard),
   cardController.createDeckCard
 );
+
 cardRouter.patch("/", cardController.updateDeckCard);
 
 export default cardRouter;
