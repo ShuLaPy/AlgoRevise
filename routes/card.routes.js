@@ -7,6 +7,9 @@ const cardRouter = Router();
 
 cardRouter.get("/", cardController.getAllDeckCards);
 
+cardRouter.get("/duetoday", cardController.getDueToday);
+cardRouter.get("/pending", cardController.getPending);
+
 cardRouter.get(
   "/:cardId",
   validate(cardValidation.getCard),

@@ -10,6 +10,13 @@ const deckCardSchema = new Schema({
   resources: [String],
   Notes: String,
   revision: Boolean,
+  status: {
+    type: String,
+    enum: {
+      values: ["new", "learning", "review"],
+      message: "{VALUE} is not supported",
+    },
+  },
   difficulty: {
     type: String,
     enum: {

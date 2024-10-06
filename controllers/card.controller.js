@@ -56,3 +56,27 @@ export const updateDeckCard = catchAsync(async (req, res) => {
   const card = await cardService.updateCardById(req.body);
   res.status(httpStatus.OK).send(card);
 });
+
+export const getDueToday = catchAsync(async (req, res) => {
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+
+  let start = new Date();
+  start.setHours(0, 0, 0, 0);
+  let end = new Date();
+  end.setHours(23, 59, 59, 999);
+
+  const filter = { next_review_date: { $gte: start, $lte: end } };
+  const cards = await cardService.getAllCards(filter, options);
+  res.status(httpStatus.OK).send(cards);
+});
+
+export const getPending = catchAsync(async (req, res) => {
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+
+  let start = new Date();
+  start.setHours(0, 0, 0, 0);
+
+  const filter = { next_review_date: { $lt: start } };
+  const cards = await cardService.getAllCards(filter, options);
+  res.status(httpStatus.OK).send(cards);
+});
