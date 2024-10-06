@@ -2,10 +2,17 @@ import httpStatus from "http-status";
 import catchAsync from "../utils/catchAsync.js";
 import * as cardService from "../services/card.services.js";
 import schedulerAlgorithm from "./algorithm.js";
+import pick from "../utils/pick.js";
 
 export const getDeckCard = catchAsync(async (req, res) => {
   const card = await cardService.getCardById(req.params.cardId);
   res.status(httpStatus.OK).send(card);
+});
+
+export const getAllDeckCards = catchAsync(async (req, res) => {
+  const options = pick(req.query, ["sortBy", "limit", "page"]);
+  const result = await cardService.getAllCards({}, options);
+  res.status(httpStatus.OK).send(result);
 });
 
 export const createDeckCard = catchAsync(async (req, res) => {

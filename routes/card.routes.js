@@ -5,7 +5,7 @@ import * as cardValidation from "../validations/card.validation.js";
 
 const cardRouter = Router();
 
-cardRouter.get("/", cardController.getDeckCard);
+cardRouter.get("/", cardController.getAllDeckCards);
 
 cardRouter.get(
   "/:cardId",

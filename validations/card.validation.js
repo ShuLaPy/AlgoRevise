@@ -30,4 +30,12 @@ const reviewCard = {
   }),
 };
 
-export { createCard, getCard, reviewCard };
+const getAllDeckCards = {
+  query: Joi.object().keys({
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
+
+export { createCard, getCard, reviewCard, getAllDeckCards };

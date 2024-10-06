@@ -4,8 +4,8 @@ const getCardById = async (id) => {
   return Card.findById(id);
 };
 
-const getAllCards = async () => {
-  return Card.create(cardBody);
+const getAllCards = async (filter, options) => {
+  return Card.paginate(filter, options);
 };
 
 const createCard = async (cardBody) => {

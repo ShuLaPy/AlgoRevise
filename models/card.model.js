@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
-import toJSON from "./plugins/toJSON.js";
+import toJSON from "./plugins/toJSON.plugin.js";
+import paginate from "./plugins/paginate.plugin.js";
 
 const deckCardSchema = new Schema({
   question: String,
@@ -40,6 +41,7 @@ const deckCardSchema = new Schema({
 });
 
 deckCardSchema.plugin(toJSON);
+deckCardSchema.plugin(paginate);
 
 const card = model("card", deckCardSchema);
 
