@@ -18,6 +18,13 @@ export const createDeckCard = catchAsync(async (req, res) => {
     last_review_date: new Date(),
   };
 
+  const data = schedulerAlgorithm(user_card);
+
+  user_card = {
+    ...user_card,
+    ...data,
+  };
+
   const card = await cardService.createCard(user_card);
   res.status(httpStatus.CREATED).send(card);
 });
