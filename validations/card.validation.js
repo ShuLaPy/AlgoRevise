@@ -12,6 +12,7 @@ const createCard = {
     revision: Joi.boolean().required(),
     difficulty: Joi.string().required().valid("easy", "medium", "hard"),
     grade: Joi.string().required().valid("easy", "good", "hard", "again"),
+    last_time_taken: Joi.number().required(),
   }),
 };
 
@@ -27,6 +28,7 @@ const reviewCard = {
   }),
   body: Joi.object().keys({
     grade: Joi.string().required().valid("easy", "good", "hard", "again"),
+    last_time_taken: Joi.number().required(),
   }),
 };
 

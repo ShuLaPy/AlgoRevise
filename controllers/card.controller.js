@@ -3,6 +3,7 @@ import catchAsync from "../utils/catchAsync.js";
 import * as cardService from "../services/card.services.js";
 import schedulerAlgorithm from "./algorithm.js";
 import pick from "../utils/pick.js";
+import { historyServices } from "../services/index.js";
 
 export const getDeckCard = catchAsync(async (req, res) => {
   const card = await cardService.getCardById(req.params.cardId);
@@ -15,10 +16,21 @@ export const getAllDeckCards = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(result);
 });
 
+const createHistoryRecord = async (card) => {
+  const data = {
+    user_id: card.user_id,
+    time_taken: card.last_time_taken,
+    question_id: card.id,
+    tags: card.tags,
+  };
+  await historyServices.createRecord(data);
+};
+
 export const createDeckCard = catchAsync(async (req, res) => {
   let user_card = req.body;
   user_card = {
     ...user_card,
+    user_id: req.user.id,
     review_count: 0,
     ease_factor: 2.5,
     interval: 1,
@@ -33,6 +45,7 @@ export const createDeckCard = catchAsync(async (req, res) => {
   };
 
   const card = await cardService.createCard(user_card);
+  await createHistoryRecord(card);
   res.status(httpStatus.CREATED).send(card);
 });
 
@@ -49,6 +62,7 @@ export const reviewDeckCard = catchAsync(async (req, res) => {
   };
 
   const updated_card = await cardService.updateCardById(card.id, update_values);
+  await createHistoryRecord(updated_card);
   res.status(httpStatus.OK).send(updated_card);
 });
 

@@ -1,8 +1,9 @@
-import { Schema, model } from "mongoose";
+import { Schema, SchemaTypes, model } from "mongoose";
 import { toJSON, paginate } from "./plugins/index.js";
 
 const deckCardSchema = new Schema(
   {
+    user_id: SchemaTypes.ObjectId,
     question: String,
     question_link: String,
     platform: String,
@@ -25,6 +26,7 @@ const deckCardSchema = new Schema(
       },
     },
     review_count: Number,
+    last_time_taken: Number,
     ease_factor: {
       type: Number,
       default: 2.5,

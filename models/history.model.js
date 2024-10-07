@@ -3,8 +3,11 @@ import { Schema, model, SchemaTypes } from "mongoose";
 const historySchema = new Schema(
   {
     user_id: SchemaTypes.ObjectId,
-    timestamp: Date,
-    time_required: Number,
+    timestamp: {
+      type: Date,
+      default: new Date(),
+    },
+    time_taken: Number,
     question_id: SchemaTypes.ObjectId,
     tags: [String],
   },
