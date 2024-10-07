@@ -22,6 +22,7 @@ const createHistoryRecord = async (card) => {
     time_taken: card.last_time_taken,
     question_id: card.id,
     tags: card.tags,
+    grade: card.grade,
   };
   await historyServices.createRecord(data);
 };

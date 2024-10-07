@@ -8,7 +8,7 @@ const createCard = {
     platform: Joi.string().required(),
     tags: Joi.array().items(Joi.string().required()),
     resources: Joi.array().items(Joi.string()),
-    note: Joi.string(),
+    note: Joi.string().allow(null, ""),
     revision: Joi.boolean().required(),
     difficulty: Joi.string().required().valid("easy", "medium", "hard"),
     grade: Joi.string().required().valid("easy", "good", "hard", "again"),

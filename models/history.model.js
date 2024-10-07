@@ -10,6 +10,13 @@ const historySchema = new Schema(
     time_taken: Number,
     question_id: SchemaTypes.ObjectId,
     tags: [String],
+    grade: {
+      type: String,
+      enum: {
+        values: ["easy", "good", "hard", "again"],
+        message: "{VALUE} is not supported",
+      },
+    },
   },
   {
     timeseries: {
