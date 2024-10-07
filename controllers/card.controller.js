@@ -80,7 +80,14 @@ export const getDueToday = catchAsync(async (req, res) => {
   let end = new Date();
   end.setHours(23, 59, 59, 999);
 
-  const filter = { next_review_date: { $gte: start, $lte: end } };
+  const filter = {
+    $and: [
+      { next_review_date: { $gte: start, $lte: end } },
+      {
+        revision: true,
+      },
+    ],
+  };
   const cards = await cardService.getAllCards(filter, options);
   res.status(httpStatus.OK).send(cards);
 });
@@ -91,7 +98,14 @@ export const getPending = catchAsync(async (req, res) => {
   let start = new Date();
   start.setHours(0, 0, 0, 0);
 
-  const filter = { next_review_date: { $lt: start } };
+  const filter = {
+    $and: [
+      { next_review_date: { $lt: start } },
+      {
+        revision: true,
+      },
+    ],
+  };
   const cards = await cardService.getAllCards(filter, options);
   res.status(httpStatus.OK).send(cards);
 });
