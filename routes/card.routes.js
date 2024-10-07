@@ -2,10 +2,11 @@ import { Router } from "express";
 import { cardController } from "../controllers/index.js";
 import validate from "../middlewares/validate.js";
 import * as cardValidation from "../validations/card.validation.js";
+import auth from "../middlewares/auth.js";
 
 const cardRouter = Router();
 
-cardRouter.get("/", cardController.getAllDeckCards);
+cardRouter.get("/", auth(), cardController.getAllDeckCards);
 
 cardRouter.get("/duetoday", cardController.getDueToday);
 cardRouter.get("/pending", cardController.getPending);

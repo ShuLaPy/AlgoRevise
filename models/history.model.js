@@ -1,11 +1,11 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, SchemaTypes } from "mongoose";
 
 const historySchema = new Schema(
   {
-    user_id: Types.ObjectId,
+    user_id: SchemaTypes.ObjectId,
     timestamp: Date,
     time_required: Number,
-    question_id: Types.ObjectId,
+    question_id: SchemaTypes.ObjectId,
     tags: [String],
   },
   {

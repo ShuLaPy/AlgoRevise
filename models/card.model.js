@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
-import toJSON from "./plugins/toJSON.plugin.js";
-import paginate from "./plugins/paginate.plugin.js";
+import { toJSON, paginate } from "./plugins/index.js";
 
 const deckCardSchema = new Schema(
   {
